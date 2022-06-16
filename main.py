@@ -54,14 +54,19 @@ def is_win(game_deck_status, sign='X'):
 
 def main():
     game_deck_status = [[' ', ' ', ' '], [' ', ' ', ' '], [' ', ' ', ' ']]
+    endgame_counter = 0
     # print(is_win(game_deck_status))  # debug
     show_game_deck(game_deck_status)
     while True:
+        endgame_counter = endgame_counter + 1  # check endgame move
         player_x_choice = check_player_choice(game_deck_status, "X")  # X - player move
         mark_play_deck(game_deck_status, player_x_choice, "X")
         show_game_deck(game_deck_status)
         if is_win(game_deck_status, 'X'):
             print("X win")
+            break
+        if endgame_counter == 5:  # every turn player do two move, odd move player X will be last
+            print('draw')
             break
         player_y_choice = check_player_choice(game_deck_status, "O")  # O - player move
         mark_play_deck(game_deck_status, player_y_choice, "O")
